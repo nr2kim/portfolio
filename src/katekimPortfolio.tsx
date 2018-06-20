@@ -56,7 +56,7 @@ class KateKimPortfolio extends React.Component <any, any> {
                     \n\tdiff\t\tShow what makes Kate Kim a strong candidate\
                     \n\tfetch\t\tGet work experiences, projects, etc\
                     \n\tcontact\t\tFetch Kate\'s contact information\
-                    \n\nSee \'help <command>\' to read about a specific subcommand or concept.\n\n'
+                    \n\nSee \'kate help <command>\' to read about a specific subcommand or concept.\n\n'
         };
         this.mouseDownBinder = (e: MouseEvent) => { this.handleMouseClick(e); };
     }
@@ -106,7 +106,7 @@ class KateKimPortfolio extends React.Component <any, any> {
         } else if (command === '') {
             // Nothing;
         } else {
-            currentStack = currentStack.concat('\nCommand not found.\nType \'help\' to see all available commands\n');
+            currentStack = currentStack.concat('Command not found.\nType \'help\' to see all available commands\n');
         }
 
         this.setState({stack: currentStack});
