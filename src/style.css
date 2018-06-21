@@ -6,6 +6,7 @@ html, input {
     background-color: black;
     color: white;
     font-weight: bold;
+    line-height: 1.5
 }
 
 body {
