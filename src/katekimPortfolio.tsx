@@ -15,8 +15,9 @@ const myMenu = {
                     \n\t3B Honours in Computer Engineering, Honours Bachelor of Applied Science (BASc)\
                     \n\tCourses:\
                     \n\t\tECE351 Compilers : \
+                    \n\n🎒 St. Joseph\'s Morrow Park High School 🎒\
                     \n',
-        knows:      'Soft skills 🍦\tgreat teamwork skills - has been working in many agile teams\
+        knows:      'Soft skills \t🍦 great teamwork skills - has been working in many agile teams\
                     \n\t\t💬 good communication skills - even training to talk to a cat\
                     \n\t\t🌱 learn quickly \
                     \n\t\t🔥 enthusiastic\
@@ -41,6 +42,27 @@ const myMenu = {
                 \n\tNo options available\
                 \n'
     },
+    fetch: {
+        experiences:    '👩‍💻 Work Experience 👩‍💻\
+                        \nWeb and Cloud Developer in Autodesk, Montreal Office\
+                        \nFrom April, 2018 to August, 2018\
+                        \n\t👉 Used React\
+                        \nSoftware Engineer in Ford Motor Company, Kanata Office\
+                        \nFrom September, 2017 to December, 2017\
+                        \n\t👉 What did I do\
+                        \n\t👉 What learned\
+                        \nQA Automation Developer in IBM Corporation, Toronto Office\
+                        \n\t👉 QAAAAA\
+                        \nSoftware Engineer in MindsLab, Korea and New Jersey Offices\
+                        \n\t👉 deep learning\
+                        \n',
+        projects:       '📚 Side Projects 📚\
+                        \nCloud management system\
+                        \nFrom June, 2018 to Present\
+                        \n\t🔍 Java application with swings library for UI\
+                        \n',
+        resume:         ''
+    },
     contact:    '✉️\tnr2kim@edu.uwaterloo.ca\
                 \n📞\t(647) 447 - 2273\
                 \nGithub\thttps://github.com/nr2kim\
@@ -50,6 +72,8 @@ const myMenu = {
 class KateKimPortfolio extends React.Component <any, any> {
     private mouseDownBinder;
     private end;
+    private stackedCommands;
+    private upCount;
 
     public constructor(props) {
         super(props);
@@ -63,6 +87,8 @@ class KateKimPortfolio extends React.Component <any, any> {
                     \n\nSee \'kate help <command>\' to read about a specific subcommand or concept.\n\n'
         };
         this.mouseDownBinder = (e: MouseEvent) => { this.handleMouseClick(e); };
+        this.stackedCommands = [];
+        this.upCount = 0;
     }
 
     public handleMouseClick(e: MouseEvent) {
@@ -87,6 +113,8 @@ class KateKimPortfolio extends React.Component <any, any> {
     public handleEnter(e) {
         if (e.key !== 'Enter') { return; }
         const command = e.target.value.toString();
+        this.stackedCommands.push(command);
+        this.upCount = 0;
         // tslint:disable-next-line:prefer-const
         let currentStack = this.state.stack.concat(`>> ${command.toString()}\n\n`);
         e.target.value = '';
@@ -119,11 +147,33 @@ class KateKimPortfolio extends React.Component <any, any> {
         this.setState({stack: currentStack});
     }
 
+    public handleArrowUpDown(e) {
+        const inputField = document.querySelector('#userField') as HTMLInputElement;
+        if (e.keyCode === 38) { // 38: up, 40: down
+            if (this.upCount < this.stackedCommands.length) {
+                this.upCount++;
+            }
+        } else if (e.keyCode === 40) {
+            if (this.upCount > 0) {
+                this.upCount--;
+            }
+        } else {
+            return;
+        }
+        const to = Math.min(Math.max(this.stackedCommands.length - this.upCount, 0), this.stackedCommands.length);
+        // tslint:disable-next-line:prefer-conditional-expression
+        if (to === this.stackedCommands.length) {
+            inputField.value = '';
+        } else {
+            inputField.value = this.stackedCommands[to];
+        }
+    }
     public render() {
         return (
             <div>
                 {this.state.stack}
                 >> <input type='text' id='userField' onKeyPress={(e) => this.handleEnter(e)}
+                    onKeyDown={(e) => this.handleArrowUpDown(e)}
                     ref={(el) => { this.end = el; } } />
             </div>
         );
