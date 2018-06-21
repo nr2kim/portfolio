@@ -141,7 +141,7 @@ class KateKimPortfolio extends React.Component <any, any> {
         } else if (command === '') {
             // Nothing
         } else {
-            currentStack = currentStack.concat('Command not found.\nType \'help\' to see all available commands\n');
+            currentStack = currentStack.concat('Command not found.\nType \'help\' to see all available commands\n\n');
         }
 
         this.setState({stack: currentStack});
