@@ -2,7 +2,7 @@ html, input {
     font-family: "Courier New", Courier, monospace;
     font-size: 14px;
     overflow-x: hidden;
-    white-space: pre;
+    white-space: pre-wrap;
     background-color: black;
     color: white;
     font-weight: bold;
