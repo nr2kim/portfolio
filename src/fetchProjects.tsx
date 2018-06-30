@@ -11,7 +11,8 @@ export class FetchProjects extends React.Component <any, any> {
 
     public render() {
         return (
-            <Typing speed={5}>
+            <Typing speed={5} key='fp'
+             onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
                     📚 Side Projects 📚
                         <br />Cloud management system
                         <br />From June, 2018 to Present

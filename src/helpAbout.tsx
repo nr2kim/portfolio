@@ -11,7 +11,8 @@ export class HelpAbout extends React.Component <any, any> {
 
     public render() {
         return (
-            <Typing speed={5}>
+            <Typing speed={5} key='ha'
+             onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
                     💁 Name: about
                     <br />Options:
                     <br />&emsp;kate

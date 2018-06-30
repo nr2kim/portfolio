@@ -11,8 +11,9 @@ export class FetchResume extends React.Component <any, any> {
 
     public render() {
         return (
-            <Typing speed={5}>
-                    💁 Name: fatch
+            <Typing speed={5} key='fr'
+             onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
+                    💁 Name: fetch
                     <br />Options:
                     <br />&emsp;experiences&emsp;Show previous work experiences
                     <br />&emsp;projects&emsp;Fetch side projects

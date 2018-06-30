@@ -1,13 +1,14 @@
+import { EventEmitter } from 'fbemitter';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Typing from 'react-typing-animation';
-
 // tslint:disable-next-line:no-import-side-effect
 import './style.css';
 
 import { AboutEducation } from './aboutEducation';
 import { AboutKate } from './aboutKate';
 import { AboutKnows } from './aboutKnows';
+import { CommandNotFound } from './commandNotFound';
 import { Contact } from './contact';
 import { FetchExperiences } from './fetchExperiences';
 import { FetchProjects } from './fetchProjects';
@@ -22,20 +23,14 @@ class KateKimPortfolio extends React.Component <any, any> {
     private stackedCommands;
     private upCount;
     private myMenu;
+    private emitter;
 
     public constructor(props) {
         super(props);
+        this.emitter = new EventEmitter();
         this.state = {
-            stack: [
-                <Typing speed={5}>
-                     >> Welcome to Kate Kim's Portfolio!
-                    <br /><br />usage: kate commands [args]
-                    <br /><br />There are some useful commands used to explore this portfolio.
-                    <br />&emsp;about&emsp;&emsp;Get basic information about Kate
-                    <br />&emsp;fetch&emsp;&emsp;Get work experiences, projects, etc
-                    <br />&emsp;contact&emsp;&emsp;Fetch Kate's contact information
-                    <br /><br />See 'kate help command' to read about a specific subcommand or concept.<br /><br />
-                </Typing>]
+            stack: [],
+            displayInput: false
         };
         this.mouseDownBinder = (e: MouseEvent) => { this.handleMouseClick(e); };
         this.stackedCommands = [];
@@ -43,21 +38,22 @@ class KateKimPortfolio extends React.Component <any, any> {
 
         this.myMenu = {
             about: {
-                kate:       <AboutKate />,
-                education:  <AboutEducation />,
-                knows:      <AboutKnows />
+                kate:       <AboutKate emitter={this.emitter} key='aboutKate' />,
+                education:  <AboutEducation emitter={this.emitter} key='aboutEducation' />,
+                knows:      <AboutKnows emitter={this.emitter} key='aboutKnows' />
             },
             help: {
-                about:      <HelpAbout />,
-                fetch:      <HelpFetch />,
-                contact:    <HelpContact />
+                about:      <HelpAbout emitter={this.emitter} key='helpAbout' />,
+                fetch:      <HelpFetch emitter={this.emitter} key='helpFetch' />,
+                contact:    <HelpContact emitter={this.emitter} key='helpContact' />
             },
             fetch: {
-                experiences:    <FetchExperiences />,
-                projects:       <FetchProjects />,
-                resume:         <FetchResume />
+                experiences:    <FetchExperiences emitter={this.emitter} key='fetchExperience' />,
+                projects:       <FetchProjects emitter={this.emitter} key='fetchProjects' />,
+                resume:         <FetchResume emitter={this.emitter} key='fetchResume' />
             },
-            contact:    <Contact />
+            contact:    <Contact emitter={this.emitter} key='contact' />,
+            commandNotFound: <CommandNotFound emitter={this.emitter} key='commandNotFound' />
         };
     }
 
@@ -68,8 +64,34 @@ class KateKimPortfolio extends React.Component <any, any> {
         }
     }
 
+    public handleFinishedTyping() {
+        this.setState({ displayInput: true });
+        const inputField = document.querySelector('#userField') as HTMLInputElement;
+        inputField.focus();
+        this.end.scrollIntoView({ behavior: 'smooth'});
+    }
     public componentDidMount() {
         document.addEventListener('click', this.mouseDownBinder);
+        this.emitter.addListener('finishedTyping', () => this.handleFinishedTyping());
+        const commandAngleBracketed = '<command>';
+        const argsAngleBracketed = '<args>';
+        this.setState({
+            stack: [
+                <Typing speed={5} key='introMessage'
+                 onFinishedTyping={() => {this.emitter.emit('finishedTyping'); }} >
+                    >> Welcome to Kate Kim's Portfolio!
+                    <br /><br />usage: kate {commandAngleBracketed} [{argsAngleBracketed}]
+                    <br /><br />There are some useful commands used to explore this portfolio.
+                    <br />&emsp;about&emsp;&emsp;Get basic information about Kate
+                    <br />&emsp;fetch&emsp;&emsp;Get work experiences, projects, etc
+                    <br />&emsp;contact&emsp;&emsp;Fetch Kate's contact information
+                    <br /><br />
+                        See 'kate help' or 'kate help {commandAngleBracketed}'
+                        to read about a specific subcommand or concept.
+                    <br /><br />
+                </Typing>
+            ]
+        });
     }
 
     public componentWillUnmount() {
@@ -82,6 +104,7 @@ class KateKimPortfolio extends React.Component <any, any> {
 
     public handleEnter(e) {
         if (e.key !== 'Enter') { return; }
+        this.setState({ displayInput: false });
         const command = e.target.value.toString();
         e.target.value = '';
         this.stackedCommands.push(command);
@@ -94,10 +117,7 @@ class KateKimPortfolio extends React.Component <any, any> {
         const splitCommands = command.split(' ');
         if (splitCommands[0] === 'kate') {
             if (splitCommands.length === 1) {
-                newResponse = [...newResponse,
-                               <Typing speed={5}>
-                                    usage: kate command args<br /><br />
-                                </Typing>];
+                newResponse = [this.myMenu.commandNotFound];
             } else if (splitCommands.length === 2 && this.myMenu[splitCommands[1]]) {
                 if (typeof(this.myMenu[splitCommands[1]]) === 'string') {
                     newResponse = [...newResponse, <div>{this.myMenu[splitCommands[1]]}<br /></div>];
@@ -113,14 +133,12 @@ class KateKimPortfolio extends React.Component <any, any> {
                             newResponse = [...newResponse,
                                            <div>{this.myMenu[splitCommands[1]][splitCommands[2]]}<br /></div>];
             } else {
-                newResponse = [<Typing speed={10}>Command not found.
-                                    <br />Type 'help' to see all available commands<br /><br /></Typing>];
+                newResponse = [this.myMenu.commandNotFound];
             }
         } else if (command === '') {
             // Nothing
         } else {
-            newResponse = [<Typing speed={10}>Command not found.
-                                    <br />Type 'help' to see all available commands<br /><br /></Typing>];
+            newResponse = [this.myMenu.commandNotFound];
         }
         this.setState((prevState) => ({ stack: [...prevState.stack, newResponse]}));
     }
@@ -150,9 +168,10 @@ class KateKimPortfolio extends React.Component <any, any> {
         return (
             <div>
                 {this.state.stack}
+                <div style={{display: (this.state.displayInput === true ? 'block' : 'none')}} >
                 >> <input type='text' id='userField' onKeyPress={(e) => this.handleEnter(e)}
-                    onKeyDown={(e) => this.handleArrowUpDown(e)}
-                    ref={(el) => { this.end = el; } } />
+                    onKeyDown={(e) => this.handleArrowUpDown(e)} ref={(el) => { this.end = el; } } />
+                </div>
             </div>
         );
     }

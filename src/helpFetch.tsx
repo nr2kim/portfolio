@@ -11,7 +11,8 @@ export class HelpFetch extends React.Component <any, any> {
 
     public render() {
         return (
-            <Typing speed={5}>
+            <Typing speed={5} key='hf'
+             onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
                 💁 Name: fatch
                 <br />Options:
                 <br />&emsp;experiences&emsp;Show previous work experiences

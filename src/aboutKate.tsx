@@ -10,9 +10,10 @@ export class AboutKate extends React.Component <any, any> {
 
     public render() {
         return (
-            <Typing speed={5} onFinishedTyping={this.props.scroll}>
+            <Typing speed={5} key='ak'
+             onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
                     Name: Kate Kim
-                    <br />Mission statement: One can change everyone's daily life
+                    <br />Mission statement: One can change everyone's daily life; stay motivated!
                     <br />Interests: Food fighter (ง •̀_•́)ง
                     <br />Comment: Hi!
                     <br />
