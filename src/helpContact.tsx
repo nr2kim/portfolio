@@ -11,7 +11,7 @@ export class HelpContact extends React.Component <any, any> {
 
     public render() {
         return (
-            <Typing speed={5} key='hc'
+            <Typing speed={1} key='hc'
              onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
                 💁 Name: contact
                 <br />Options:

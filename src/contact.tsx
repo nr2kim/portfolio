@@ -10,7 +10,7 @@ export class Contact extends React.Component <any, any> {
 
     public render() {
         return (
-            <Typing speed={5} key='c'
+            <Typing speed={1} key='c'
              onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
                     ✉️&emsp;nr2kim@edu.uwaterloo.ca
                     <br />📞&emsp;(647) 447 - 2273

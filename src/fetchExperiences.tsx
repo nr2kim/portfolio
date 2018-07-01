@@ -11,7 +11,7 @@ export class FetchExperiences extends React.Component <any, any> {
 
     public render() {
         return (
-            <Typing speed={5} key='fe'
+            <Typing speed={1} key='fe'
              onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
                 👩‍💻 Work Experience 👩‍💻
                         <br />Web and Cloud Developer in Autodesk, Montreal Office

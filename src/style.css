@@ -1,11 +1,11 @@
 html, input {
-    font-family: "Courier New", Courier, monospace;
-    font-size: 14px;
+    font-family: "Lucida Console", Monaco, monospace;
+    font-size: 12px;
     overflow-x: hidden;
     white-space: pre-wrap;
     background-color: black;
     color: white;
-    font-weight: bold;
+    font-weight: normal;
     line-height: 1.5
 }
 
@@ -30,7 +30,6 @@ body {
 
 #userField {
     border: 0px;
-    font-size: 14px;
     width: 90%;
     padding: 0;
     margin: 0;
@@ -39,4 +38,47 @@ body {
 
 *:focus {
     outline: none;
+}
+
+span.limeColor {
+    color: lime;
+}
+
+.sectionHeading {
+    color: yellow;
+    margin: 0.5% 0;
+}
+
+.subSectionHeading {
+    color: LightGoldenRodYellow;
+    margin: 0.5% 2%;
+}
+
+.subSectionBody {
+    margin: 1% 4%;
+}
+
+.subSectionBodyCategory {
+    margin: 0.7% 0;
+}
+
+.subSectionBodySubCategory {
+    margin: 0.7% 2%;
+    font-style: italic;
+}
+
+.subSectionBodySubCategoryA {
+    margin: 0;
+    font-style: normal;
+}
+.subSectionBodySubCategoryBody {
+    margin: 0.2% 2%;
+    font-style: normal;
+}
+span.italic {
+    font-style: italic;
+}
+
+span.bold {
+    font-weight: bold;
 }

@@ -10,7 +10,7 @@ export class AboutKnows extends React.Component <any, any> {
 
     public render() {
         return (
-            <Typing speed={5} key='aks'
+            <Typing speed={1} key='aks'
              onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
                     Soft skills&emsp;🍦 great teamwork skills - has been working in many agile teams
                     <br />&emsp;&emsp;💬 good communication skills - even training to talk to a cat

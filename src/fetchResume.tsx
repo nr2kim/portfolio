@@ -11,7 +11,7 @@ export class FetchResume extends React.Component <any, any> {
 
     public render() {
         return (
-            <Typing speed={5} key='fr'
+            <Typing speed={1} key='fr'
              onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
                     💁 Name: fetch
                     <br />Options:

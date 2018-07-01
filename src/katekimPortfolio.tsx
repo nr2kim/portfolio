@@ -77,17 +77,23 @@ class KateKimPortfolio extends React.Component <any, any> {
         const argsAngleBracketed = '<args>';
         this.setState({
             stack: [
-                <Typing speed={5} key='introMessage'
+                <Typing speed={1} key='introMessage'
                  onFinishedTyping={() => {this.emitter.emit('finishedTyping'); }} >
-                    >> Welcome to Kate Kim's Portfolio!
-                    <br /><br />usage: kate {commandAngleBracketed} [{argsAngleBracketed}]
+                    >> 🙌🏻 Welcome to Kate Kim's Portfolio! 🙌🏻
+                    <br /><br />usage: <span className='limeColor'>
+                        kate {commandAngleBracketed} [{argsAngleBracketed}]</span>
                     <br /><br />There are some useful commands used to explore this portfolio.
-                    <br />&emsp;about&emsp;&emsp;Get basic information about Kate
-                    <br />&emsp;fetch&emsp;&emsp;Get work experiences, projects, etc
-                    <br />&emsp;contact&emsp;&emsp;Fetch Kate's contact information
+                    <br />&emsp;
+                    <span className='limeColor'>about</span>&emsp;&emsp;&emsp;&emsp;Get basic information about Kate
+                    <br />&emsp;
+                    <span className='limeColor'>fetch</span>&emsp;&emsp;&emsp;&emsp;Get work experiences, projects, etc
+                    <br />&emsp;<span className='limeColor'>contact</span>&emsp;&emsp;Fetch Kate's contact information
                     <br /><br />
-                        See 'kate help' or 'kate help {commandAngleBracketed}'
-                        to read about a specific subcommand or concept.
+                        See <span className='limeColor'>
+                                kate help
+                            </span> or <span className='limeColor'>
+                                kate help {commandAngleBracketed}
+                            </span> to read about a specific subcommand or concept.
                     <br /><br />
                 </Typing>
             ]
