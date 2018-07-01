@@ -49,6 +49,10 @@ span.limeColor {
     margin: 0.5% 0;
 }
 
+.subSection {
+    margin: 0.5% 2%;
+}
+
 .subSectionHeading {
     color: LightGoldenRodYellow;
     margin: 0.5% 2%;

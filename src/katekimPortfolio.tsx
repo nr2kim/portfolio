@@ -77,7 +77,7 @@ class KateKimPortfolio extends React.Component <any, any> {
         const argsAngleBracketed = '<args>';
         this.setState({
             stack: [
-                <Typing speed={1} key='introMessage'
+                <Typing speed={5} key='introMessage'
                  onFinishedTyping={() => {this.emitter.emit('finishedTyping'); }} >
                     >> 🙌🏻 Welcome to Kate Kim's Portfolio! 🙌🏻
                     <br /><br />usage: <span className='limeColor'>
@@ -125,14 +125,10 @@ class KateKimPortfolio extends React.Component <any, any> {
             if (splitCommands.length === 1) {
                 newResponse = [this.myMenu.commandNotFound];
             } else if (splitCommands.length === 2 && this.myMenu[splitCommands[1]]) {
-                if (typeof(this.myMenu[splitCommands[1]]) === 'string') {
-                    newResponse = [...newResponse, <div>{this.myMenu[splitCommands[1]]}<br /></div>];
-                } else {
-                    Object.keys(this.myMenu[splitCommands[1]]).forEach((key) => {
-                        newResponse = [...newResponse, <div>
-                            {this.myMenu[splitCommands[1]][key]}<br /></div>];
-                    });
-                }
+                Object.keys(this.myMenu[splitCommands[1]]).forEach((key) => {
+                    newResponse = [...newResponse, <div>
+                        {this.myMenu[splitCommands[1]][key]}<br /></div>];
+                });
             } else if (splitCommands.length === 3 &&
                         this.myMenu[splitCommands[1]] &&
                         this.myMenu[splitCommands[1]][splitCommands[2]]) {

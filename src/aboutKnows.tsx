@@ -12,12 +12,15 @@ export class AboutKnows extends React.Component <any, any> {
         return (
             <Typing speed={1} key='aks'
              onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
-                    Soft skills&emsp;🍦 great teamwork skills - has been working in many agile teams
-                    <br />&emsp;&emsp;💬 good communication skills - even training to talk to a cat
-                    <br />&emsp;&emsp;🌱 learn quickly
-                    <br />&emsp;&emsp;🔥 enthusiastic
-                    <br />&emsp;&emsp;📦 Think outside of box
-                    <br />
+                    <div className='sectionHeading'>Kate's Brain</div>
+                    <div className='subSectionHeading'> 🍦 Soft Skills 🍦</div>
+                    <div className='subSectionBody'>
+                        👪 great teamwork skills - has been working in many agile teams
+                        <br />💬 good communication skills - even training to talk to a cat
+                        <br />🌱 learn quickly
+                        <br />🔥 enthusiastic
+                        <br />📦 Think outside of box
+                    </div>
             </Typing>
         );
     }
