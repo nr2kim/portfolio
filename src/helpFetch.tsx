@@ -10,15 +10,40 @@ export class HelpFetch extends React.Component <any, any> {
     }
 
     public render() {
+        const optionsAngleBracketed = '<options>';
+
         return (
             <Typing speed={1} key='hf'
              onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
-                💁 Name: fatch
-                <br />Options:
-                <br />&emsp;experiences&emsp;Show previous work experiences
-                <br />&emsp;projects&emsp;Fetch side projects
-                <br />&emsp;resume&emsp;&emsp;Download Kate's resume
-                <br />
+                <div style={{ display: 'block', width: '90%', margin: '1% 2%'}}>
+                    <span className='bold'>usage:
+                         <span className='limeColor'> kate fetch {optionsAngleBracketed}</span></span>
+                    <div className='subSectionHeading'>options:</div>
+                    <div style={{ display: 'block', width: '90%', margin: '0 4%'}}>
+                        <div style={{ display: 'inline-block', width: '10%'}}>
+                            <span className='limeColor'>experiences</span>
+                        </div>
+                        <div style={{display: 'inline-block', width: '80%'}}>
+                            Show previous work experiences and what Kate has learned
+                        </div>
+                    </div>
+                    <div style={{ display: 'block', width: '90%', margin: '0 4%'}}>
+                        <div style={{ display: 'inline-block', width: '10%'}}>
+                            <span className='limeColor'>projects</span>
+                        </div>
+                        <div style={{display: 'inline-block', width: '80%'}}>
+                            Fetch side projects
+                        </div>
+                    </div>
+                    <div style={{ display: 'block', width: '90%', margin: '0 4%'}}>
+                        <div style={{ display: 'inline-block', width: '10%'}}>
+                            <span className='limeColor'>resume</span>
+                        </div>
+                        <div style={{display: 'inline-block', width: '80%'}}>
+                            Download Kate's resume
+                        </div>
+                    </div>
+                </div>
             </Typing>
         );
     }

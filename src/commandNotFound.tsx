@@ -10,12 +10,12 @@ export class CommandNotFound extends React.Component <any, any> {
 
     public render() {
         const commandAngleBracketed = '<command>';
-        const argsAngleBracketed = '<args>';
+        const optionsAngleBracketed = '<options>';
 
         return (
             <Typing speed={1} key='cnf'
              onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
-                usage: <span className='limeColor'>kate {commandAngleBracketed} [{argsAngleBracketed}]</span>
+                usage: <span className='limeColor'>kate {commandAngleBracketed} [{optionsAngleBracketed}]</span>
                 <br /><br />
                 Command not found.
                 <br />Type <span className='limeColor'>kate help</span> to see all available commands<br /><br />

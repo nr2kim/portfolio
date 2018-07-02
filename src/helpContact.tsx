@@ -13,10 +13,13 @@ export class HelpContact extends React.Component <any, any> {
         return (
             <Typing speed={1} key='hc'
              onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
-                💁 Name: contact
-                <br />Options:
-                <br />&emsp;No options available
-                <br />
+                <div style={{ display: 'block', width: '90%', margin: '1% 2%'}}>
+                    <span className='bold'>usage: <span className='limeColor'>kate contact</span></span>
+                    <div className='subSectionHeading'>options:</div>
+                    <div style={{ display: 'block', width: '90%', margin: '0 4%'}}>
+                        No options available
+                    </div>
+                </div>
             </Typing>
         );
     }

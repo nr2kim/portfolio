@@ -50,7 +50,7 @@ class KateKimPortfolio extends React.Component <any, any> {
             fetch: {
                 experiences:    <FetchExperiences emitter={this.emitter} key='fetchExperience' />,
                 projects:       <FetchProjects emitter={this.emitter} key='fetchProjects' />,
-                resume:         <FetchResume emitter={this.emitter} key='fetchResume' />
+                resume:         <FetchResume emitter={this.emitter} key='fetchResume'/>
             },
             contact:    <Contact emitter={this.emitter} key='contact' />,
             commandNotFound: <CommandNotFound emitter={this.emitter} key='commandNotFound' />
@@ -74,14 +74,14 @@ class KateKimPortfolio extends React.Component <any, any> {
         document.addEventListener('click', this.mouseDownBinder);
         this.emitter.addListener('finishedTyping', () => this.handleFinishedTyping());
         const commandAngleBracketed = '<command>';
-        const argsAngleBracketed = '<args>';
+        const optionsAngleBracketed = '<args>';
         this.setState({
             stack: [
                 <Typing speed={5} key='introMessage'
                  onFinishedTyping={() => {this.emitter.emit('finishedTyping'); }} >
                     >> 🙌🏻 Welcome to Kate Kim's Portfolio! 🙌🏻
                     <br /><br />usage: <span className='limeColor'>
-                        kate {commandAngleBracketed} [{argsAngleBracketed}]</span>
+                        kate {commandAngleBracketed} [{optionsAngleBracketed}]</span>
                     <br /><br />There are some useful commands used to explore this portfolio.
                     <br />&emsp;
                     <span className='limeColor'>about</span>&emsp;&emsp;&emsp;&emsp;Get basic information about Kate
@@ -125,10 +125,14 @@ class KateKimPortfolio extends React.Component <any, any> {
             if (splitCommands.length === 1) {
                 newResponse = [this.myMenu.commandNotFound];
             } else if (splitCommands.length === 2 && this.myMenu[splitCommands[1]]) {
-                Object.keys(this.myMenu[splitCommands[1]]).forEach((key) => {
-                    newResponse = [...newResponse, <div>
-                        {this.myMenu[splitCommands[1]][key]}<br /></div>];
-                });
+                if (typeof(this.myMenu[splitCommands[1]]) === 'string') {
+                    newResponse = [...newResponse, <div>{this.myMenu[splitCommands[1]]}<br /></div>];
+                } else {
+                    Object.keys(this.myMenu[splitCommands[1]]).forEach((key) => {
+                        newResponse = [...newResponse, <div>
+                            {this.myMenu[splitCommands[1]][key]}<br /></div>];
+                    });
+                }
             } else if (splitCommands.length === 3 &&
                         this.myMenu[splitCommands[1]] &&
                         this.myMenu[splitCommands[1]][splitCommands[2]]) {
