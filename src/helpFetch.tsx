@@ -1,7 +1,4 @@
 import * as React from 'react';
-import Typing from 'react-typing-animation';
-
-// tslint:disable-next-line:no-import-side-effect
 import './style.css';
 
 export class HelpFetch extends React.Component <any, any> {
@@ -13,8 +10,7 @@ export class HelpFetch extends React.Component <any, any> {
         const optionsAngleBracketed = '<options>';
 
         return (
-            <Typing speed={1} key='hf'
-             onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
+            <div>
                 <div style={{ display: 'block', width: '90%', margin: '1% 2%'}}>
                     <span className='bold'>usage:
                          <span className='limeColor'> kate fetch {optionsAngleBracketed}</span></span>
@@ -44,7 +40,7 @@ export class HelpFetch extends React.Component <any, any> {
                         </div>
                     </div>
                 </div>
-            </Typing>
+            </div>
         );
     }
 }

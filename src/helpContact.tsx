@@ -1,7 +1,4 @@
 import * as React from 'react';
-import Typing from 'react-typing-animation';
-
-// tslint:disable-next-line:no-import-side-effect
 import './style.css';
 
 export class HelpContact extends React.Component <any, any> {
@@ -11,8 +8,7 @@ export class HelpContact extends React.Component <any, any> {
 
     public render() {
         return (
-            <Typing speed={1} key='hc'
-             onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
+            <div>
                 <div style={{ display: 'block', width: '90%', margin: '1% 2%'}}>
                     <span className='bold'>usage: <span className='limeColor'>kate contact</span></span>
                     <div className='subSectionHeading'>options:</div>
@@ -20,7 +16,7 @@ export class HelpContact extends React.Component <any, any> {
                         No options available
                     </div>
                 </div>
-            </Typing>
+            </div>
         );
     }
 }

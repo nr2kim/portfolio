@@ -1,6 +1,4 @@
 import * as React from 'react';
-
-// tslint:disable-next-line:no-import-side-effect
 import './style.css';
 
 export class FetchResume extends React.Component <any, any> {
@@ -13,15 +11,14 @@ export class FetchResume extends React.Component <any, any> {
         };
     }
 
-    public componentDidMount() {
-        window.open('../resources/Resume_KateKim.pdf');
-    }
-
     public render() {
         return (
-            <a href='../resources/Resume_KateKim.pdf' download>
-                download [<span className='bold'>../resources/Resume_KateKim.pdf</span>] 98 KB
-            </a>
+            <div>
+                <a href='../resources/Resume_KateKim.pdf' target="_blank" key={this.props.key}>
+                    download [<span className='bold'>Resume_KateKim.pdf</span>] 98 KB
+                </a>
+                <br /><br />
+            </div>
         );
     }
 }

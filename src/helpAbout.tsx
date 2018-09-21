@@ -13,8 +13,7 @@ export class HelpAbout extends React.Component <any, any> {
         const optionsAngleBracketed = '<options>';
 
         return (
-            <Typing speed={1} key='ha'
-             onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
+            <div>
                 <div style={{ display: 'block', width: '90%', margin: '1% 2%'}}>
                     <span className='bold'>usage:
                          <span className='limeColor'> kate about {optionsAngleBracketed}</span></span>
@@ -44,7 +43,7 @@ export class HelpAbout extends React.Component <any, any> {
                         </div>
                     </div>
                 </div>
-            </Typing>
+            </div>
         );
     }
 }

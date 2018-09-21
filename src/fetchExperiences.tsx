@@ -1,7 +1,4 @@
 import * as React from 'react';
-import Typing from 'react-typing-animation';
-
-// tslint:disable-next-line:no-import-side-effect
 import './style.css';
 
 export class FetchExperiences extends React.Component <any, any> {
@@ -11,8 +8,7 @@ export class FetchExperiences extends React.Component <any, any> {
 
     public render() {
         return (
-            <Typing speed={1} key='fe'
-             onFinishedTyping={() => {this.props.emitter.emit('finishedTyping'); }}>
+            <div>
                 <div className='sectionHeading'>Kate's Work Experiences</div>
                 <div className='subSectionHeading'>Web and Cloud Developer in Autodesk</div>
                 <div className='subSectionBody'>
@@ -57,7 +53,7 @@ export class FetchExperiences extends React.Component <any, any> {
                                  Speech-to-text and Text-analysis.
                     <br />&emsp;👉 Created an interactive web application for the company conference using Bootstrap.
                 </div>
-            </Typing>
+            </div>
         );
     }
 }

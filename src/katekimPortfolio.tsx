@@ -1,13 +1,12 @@
-import { EventEmitter } from 'fbemitter';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Typing from 'react-typing-animation';
-// tslint:disable-next-line:no-import-side-effect
+
 import './style.css';
 
 import { AboutEducation } from './aboutEducation';
 import { AboutKate } from './aboutKate';
-import { AboutKnows } from './aboutKnows';
+import { AboutSkills } from './aboutSkills';
 import { CommandNotFound } from './commandNotFound';
 import { Contact } from './contact';
 import { FetchExperiences } from './fetchExperiences';
@@ -23,38 +22,37 @@ class KateKimPortfolio extends React.Component <any, any> {
     private stackedCommands;
     private upCount;
     private myMenu;
-    private emitter;
+    private numElement;
 
     public constructor(props) {
         super(props);
-        this.emitter = new EventEmitter();
-        this.state = {
-            stack: [],
-            displayInput: false
-        };
         this.mouseDownBinder = (e: MouseEvent) => { this.handleMouseClick(e); };
         this.stackedCommands = [];
         this.upCount = 0;
 
         this.myMenu = {
             about: {
-                kate:       <AboutKate emitter={this.emitter} key='aboutKate' />,
-                education:  <AboutEducation emitter={this.emitter} key='aboutEducation' />,
-                knows:      <AboutKnows emitter={this.emitter} key='aboutKnows' />
+                kate:       <AboutKate />,
+                education:  <AboutEducation />,
+                skills:      <AboutSkills />
             },
             help: {
-                about:      <HelpAbout emitter={this.emitter} key='helpAbout' />,
-                fetch:      <HelpFetch emitter={this.emitter} key='helpFetch' />,
-                contact:    <HelpContact emitter={this.emitter} key='helpContact' />
+                about:      <HelpAbout />,
+                fetch:      <HelpFetch />,
+                contact:    <HelpContact />
             },
             fetch: {
-                experiences:    <FetchExperiences emitter={this.emitter} key='fetchExperience' />,
-                projects:       <FetchProjects emitter={this.emitter} key='fetchProjects' />,
-                resume:         <FetchResume emitter={this.emitter} key='fetchResume'/>
+                experiences:    <FetchExperiences />,
+                projects:       <FetchProjects />,
+                resume:         <FetchResume />
             },
-            contact:    <Contact emitter={this.emitter} key='contact' />,
-            commandNotFound: <CommandNotFound emitter={this.emitter} key='commandNotFound' />
+            contact:    <Contact />,
+            commandNotFound: <CommandNotFound />
         };
+
+        this.state = {
+            stack: []
+        }
     }
 
     public handleMouseClick(e: MouseEvent) {
@@ -64,48 +62,17 @@ class KateKimPortfolio extends React.Component <any, any> {
         }
     }
 
-    public handleFinishedTyping() {
-        this.setState({ displayInput: true });
-        const inputField = document.querySelector('#userField') as HTMLInputElement;
-        inputField.focus();
-        this.end.scrollIntoView({ behavior: 'smooth'});
+    public componentDidUpdate() {
+            this.end.scrollIntoView({ behavior: 'smooth'});
     }
+
     public componentDidMount() {
         document.addEventListener('click', this.mouseDownBinder);
-        this.emitter.addListener('finishedTyping', () => this.handleFinishedTyping());
-        const commandAngleBracketed = '<command>';
-        const optionsAngleBracketed = '<args>';
-        this.setState({
-            stack: [
-                <Typing speed={5} key='introMessage'
-                 onFinishedTyping={() => {this.emitter.emit('finishedTyping'); }} >
-                    >> 🙌🏻 Welcome to Kate Kim's Portfolio! 🙌🏻
-                    <br /><br />usage: <span className='limeColor'>
-                        kate {commandAngleBracketed} [{optionsAngleBracketed}]</span>
-                    <br /><br />There are some useful commands used to explore this portfolio.
-                    <br />&emsp;
-                    <span className='limeColor'>about</span>&emsp;&emsp;&emsp;&emsp;Get basic information about Kate
-                    <br />&emsp;
-                    <span className='limeColor'>fetch</span>&emsp;&emsp;&emsp;&emsp;Get work experiences, projects, etc
-                    <br />&emsp;<span className='limeColor'>contact</span>&emsp;&emsp;Fetch Kate's contact information
-                    <br /><br />
-                        See <span className='limeColor'>
-                                kate help
-                            </span> or <span className='limeColor'>
-                                kate help {commandAngleBracketed}
-                            </span> to read about a specific subcommand or concept.
-                    <br /><br />
-                </Typing>
-            ]
-        });
+        this.numElement++;
     }
 
     public componentWillUnmount() {
         document.removeEventListener('click', this.mouseDownBinder);
-    }
-
-    public componentDidUpdate() {
-        this.end.scrollIntoView({ behavior: 'smooth'});
     }
 
     public handleEnter(e) {
@@ -118,35 +85,52 @@ class KateKimPortfolio extends React.Component <any, any> {
 
         this.setState((prevState) => ({ stack:
             [...prevState.stack, <div>>> {command.toString()}<br /><br /></div>]}));
-        let newResponse = [];
 
-        const splitCommands = command.split(' ');
+        const splitCommands = command.trim().split(' ');
         if (splitCommands[0] === 'kate') {
             if (splitCommands.length === 1) {
-                newResponse = [this.myMenu.commandNotFound];
+                // TODO:: another help session
+                this.setState((prevState) => ({ stack:
+                    [...prevState.stack, <div>
+                        Hello, buddy!
+                        <br/> To know about me, type 'kate about'.
+                        <br/> If you want to look up the options, please type 'kate help'.
+                        </div>
+                    ]
+                }));
+
             } else if (splitCommands.length === 2 && this.myMenu[splitCommands[1]]) {
-                if (typeof(this.myMenu[splitCommands[1]]) === 'string') {
-                    newResponse = [...newResponse, <div>{this.myMenu[splitCommands[1]]}<br /></div>];
+                if (splitCommands[1] === 'contact') {
+                    this.setState((prevState) => ({ stack:
+                        [...prevState.stack, <div>{this.myMenu[splitCommands[1]]}<br /></div>]
+                    }));
                 } else {
                     Object.keys(this.myMenu[splitCommands[1]]).forEach((key) => {
-                        newResponse = [...newResponse, <div>
-                            {this.myMenu[splitCommands[1]][key]}<br /></div>];
+                        this.setState((prevState) => ({ stack:
+                            [...prevState.stack, <div>{this.myMenu[splitCommands[1]][key]}<br /></div>]
+                        }));
                     });
                 }
             } else if (splitCommands.length === 3 &&
                         this.myMenu[splitCommands[1]] &&
                         this.myMenu[splitCommands[1]][splitCommands[2]]) {
-                            newResponse = [...newResponse,
-                                           <div>{this.myMenu[splitCommands[1]][splitCommands[2]]}<br /></div>];
+                this.setState((prevState) => ({ stack:
+                    [...prevState.stack, <div>{this.myMenu[splitCommands[1]][splitCommands[2]]}<br /></div>]
+                }));
             } else {
-                newResponse = [this.myMenu.commandNotFound];
+                this.setState((prevState) => ({ stack:
+                    [...prevState.stack, this.myMenu.commandNotFound]
+                }));
             }
         } else if (command === '') {
             // Nothing
         } else {
-            newResponse = [this.myMenu.commandNotFound];
+            this.setState((prevState) => ({ stack:
+                [...prevState.stack, this.myMenu.commandNotFound]
+            }));
         }
-        this.setState((prevState) => ({ stack: [...prevState.stack, newResponse]}));
+
+        this.numElement++;
     }
 
     public handleArrowUpDown(e) {
@@ -163,7 +147,6 @@ class KateKimPortfolio extends React.Component <any, any> {
             return;
         }
         const to = Math.min(Math.max(this.stackedCommands.length - this.upCount, 0), this.stackedCommands.length);
-        // tslint:disable-next-line:prefer-conditional-expression
         if (to === this.stackedCommands.length) {
             inputField.value = '';
         } else {
@@ -171,10 +154,34 @@ class KateKimPortfolio extends React.Component <any, any> {
         }
     }
     public render() {
+        const commandAngleBracketed = '<command>';
+        const optionsAngleBracketed = '<options>';
         return (
             <div>
-                {this.state.stack}
-                <div style={{display: (this.state.displayInput === true ? 'block' : 'none')}} >
+                <div>
+                    <div>
+                        🙌🏻 Welcome to Kate Kim's Portfolio! 🙌🏻
+                        <br /><br />usage: <span className='limeColor'>
+                            kate {commandAngleBracketed} [{optionsAngleBracketed}]</span>
+                        <br /><br />There are some useful commands used to explore this portfolio.
+                        <br />&emsp;
+                        <span className='limeColor'>about</span>&emsp;&emsp;&emsp;&emsp;Get basic information about Kate
+                        <br />&emsp;
+                        <span className='limeColor'>fetch</span>&emsp;&emsp;&emsp;&emsp;Get work experiences, projects, etc
+                        <br />&emsp;<span className='limeColor'>contact</span>&emsp;&emsp;Fetch Kate's contact information
+                        <br /><br />
+                            See <span className='limeColor'>
+                                    kate help
+                                </span> or <span className='limeColor'>
+                                    kate help {commandAngleBracketed}
+                                </span> to read about a specific subcommand or concept.
+                        <br /><br />
+                    </div>
+                    {this.state.stack.map(function(comp,i){
+                        return <div key={'stack' + i}>{comp}</div>
+                    })}
+                </div>
+                <div>
                 >> <input type='text' id='userField' onKeyPress={(e) => this.handleEnter(e)}
                     onKeyDown={(e) => this.handleArrowUpDown(e)} ref={(el) => { this.end = el; } } />
                 </div>
