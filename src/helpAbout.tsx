@@ -17,7 +17,7 @@ export class HelpAbout extends React.Component <any, any> {
                 <div style={{ display: 'block', width: '90%', margin: '1% 2%'}}>
                     <span className='bold'>usage:
                          <span className='limeColor'> kate about {optionsAngleBracketed}</span></span>
-                    <div className='subSectionHeading'>options:</div>
+                    <div className='subSection'>options:</div>
                     <div style={{ display: 'block', width: '90%', margin: '0 4%'}}>
                         <div style={{ display: 'inline-block', width: '10%'}}>
                             <span className='limeColor'>kate</span>
@@ -36,7 +36,7 @@ export class HelpAbout extends React.Component <any, any> {
                     </div>
                     <div style={{ display: 'block', width: '90%', margin: '0 4%'}}>
                         <div style={{ display: 'inline-block', width: '10%'}}>
-                            <span className='limeColor'>knows</span>
+                            <span className='limeColor'>skills</span>
                         </div>
                         <div style={{display: 'inline-block', width: '80%'}}>
                             See what Kate knows about

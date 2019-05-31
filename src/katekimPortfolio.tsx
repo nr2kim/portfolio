@@ -92,9 +92,10 @@ class KateKimPortfolio extends React.Component <any, any> {
                 // TODO:: another help session
                 this.setState((prevState) => ({ stack:
                     [...prevState.stack, <div>
-                        Hello, buddy!
-                        <br/> To know about me, type 'kate about'.
-                        <br/> If you want to look up the options, please type 'kate help'.
+                        Hello,
+                        <br/>To know about me, type 'kate about'.
+                        <br/>If you want to look up the options, please type 'kate help'.
+                        <br/><br/>
                         </div>
                     ]
                 }));

@@ -44,40 +44,54 @@ span.limeColor {
     color: lime;
 }
 
-.sectionHeading {
+.section {
     color: yellow;
     margin: 0.5% 0;
 }
 
 .subSection {
     margin: 0.5% 2%;
-}
-
-.subSectionHeading {
     color: LightGoldenRodYellow;
     margin: 0.5% 2%;
+    cursor: pointer;
 }
 
+.subSection .contact {
+    cursor: default;
+}
+
+.subSection img {
+    height: 40%;
+    width: 20%;
+    margin: 1% 4%;
+}
 .subSectionBody {
     margin: 1% 4%;
+    display: none;
+    cursor: default;
 }
 
 .subSectionBodyCategory {
     margin: 0.7% 0;
+    cursor: default;
 }
 
 .subSectionBodySubCategory {
     margin: 0.7% 2%;
     font-style: italic;
+    cursor: pointer;
 }
 
 .subSectionBodySubCategoryA {
     margin: 0;
     font-style: normal;
+    cursor: default;
 }
 .subSectionBodySubCategoryBody {
     margin: 0.2% 2%;
     font-style: normal;
+    display: none;
+    cursor: default;
 }
 span.italic {
     font-style: italic;
@@ -91,3 +105,79 @@ a {
     color: white;
     text-decoration: none;
 }
+
+#openClose {
+    display: inline-block;
+}
+
+#senderName, #senderEmail {
+    margin: 10px 0;
+    padding: 0 10px;
+    width: 50%;
+    height: 20px;
+    border: 0.5px solid white;
+    display: block;
+    border-radius: 4px;
+}
+
+#message {
+    margin: 10px 0;
+    display: block;
+    vertical-align: text-top;
+    width: 50%;
+    height: 50px;
+    line-height: 15px;
+    padding: 10px;
+    overflow: auto;
+    border-radius: 4px;
+    border: 0.5px solid white;
+    background: black;
+    color: white;
+}
+
+#msgSubmit {
+    margin: 10px 1%;
+    padding: 0 10px;
+    width: 50%;
+    background: black;
+    border: 0.5px solid white;
+    transition: all 0.5s;
+    display: block;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+}
+
+#msgSubmit span {
+    cursor: pointer;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+    height: 20px;
+}
+
+#msgSubmit span:after {
+    content: '\00bb';
+    right: -20px;
+    position: absolute;
+    opacity: 0;
+}
+
+#msgSubmit:hover {
+    color: black;
+    background: white;
+}
+
+#msgSubmit:hover span {
+    padding-right: 25px;
+}
+
+#msgSubmit:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+
+
