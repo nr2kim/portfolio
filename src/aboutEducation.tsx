@@ -1,28 +1,9 @@
 import * as React from 'react';
+import { Component } from './component';
+
 import './style.css';
 
-export class AboutEducation extends React.Component <any, any> {
-    public constructor(props) {
-        super(props);
-    }
-
-    public onClickHeading(e: any) {
-        e.preventDefault();
-        for(let i = 0; i < e.target.children.length; i++) {
-            if (e.target.children.item(i).id == "openClose") {
-                if (e.target.children.item(i).innerHTML == " 🔼 ") {
-                    e.target.children.item(i).innerHTML = " 🔽 ";
-                } else {
-                    e.target.children.item(i).innerHTML = " 🔼 ";
-                }
-            } else if (e.target.children.item(i).style.display === "") {
-                e.target.children.item(i).style.display = "block";
-            } else {
-                e.target.children.item(i).style.display = "";
-            }
-        }
-    }
-
+export class AboutEducation extends Component {
     public render() {
         return (
             <div>
@@ -30,8 +11,26 @@ export class AboutEducation extends React.Component <any, any> {
                 <div className='subSection' onClick={(e: any) => this.onClickHeading(e)}>
                     <div id="openClose"> 🔽 </div> University of Waterloo
                     <div className='subSectionBody'>Attending from Sept 2015: expected to graduate in June of 2020
-                        <br />3B Honours in Computer Engineering, Honours Bachelor of Applied Science (BASc)
+                        <br />4A Honours in Computer Engineering, Honours Bachelor of Applied Science (BASc)
                         <div className='subSectionBodyCategory'>Courses
+                            <div className='subSectionBodySubCategory'>
+                                <div id="openClose"> 🔽 </div> Deep Learning
+                                <div className='subSectionBodySubCategoryBody'>
+                                    studying probabilistic Modelling, inference, and reasoning tools and decision making
+                                </div>
+                            </div>
+                            <div className='subSectionBodySubCategory'>
+                                <div id="openClose"> 🔽 </div> Security
+                                <div className='subSectionBodySubCategoryBody'>
+                                    studying computer security and cryptography
+                                </div>
+                            </div>
+                            <div className='subSectionBodySubCategory'>
+                                <div id="openClose"> 🔽 </div> Distributed Systems
+                                <div className='subSectionBodySubCategoryBody'>
+                                    studying computer architecture and distributed systems.
+                                </div>
+                            </div>
                             <div className='subSectionBodySubCategory'>
                                 <div id="openClose"> 🔽 </div> Concurrent and Parallel Programming
                                 <div className='subSectionBodySubCategoryBody'>
@@ -56,18 +55,6 @@ export class AboutEducation extends React.Component <any, any> {
                                 <div className='subSectionBodySubCategoryBody'>
                                     worked on dataflow diagrams, timing and power analysis, and performance
                                     optimization in hardware description language, VHDL.
-                                </div>
-                            </div>
-                            <div className='subSectionBodySubCategory'>
-                                <div id="openClose"> 🔽 </div> Probability Theory and Statistics
-                                <div className='subSectionBodySubCategoryBody'>
-                                    explored many probability and statistics theories and functions.
-                                </div>
-                            </div>
-                            <div className='subSectionBodySubCategory'>
-                                <div id="openClose"> 🔽 </div> Discrete Mathematics
-                                <div className='subSectionBodySubCategoryBody'>
-                                    learned probability algorithms, public-key cryptography, RSA, and graph theory
                                 </div>
                             </div>
                         </div>

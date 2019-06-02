@@ -16,6 +16,7 @@
     "@types/fbemitter": "^2.0.32",
     "@types/react": "^16.3.17",
     "@types/react-dom": "^16.0.6",
+    "browserify-fs": "1.0.0",
     "fbemitter": "^2.1.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
@@ -40,7 +41,8 @@
   },
   "scripts": {
     "build:dev": "webpack --mode=development",
-    "start:dev": "webpack --mode=development && webpack-dev-server --open --mode=development"
+    "start:dev": "webpack --mode=development && webpack-dev-server --open --mode=development",
+    "build": "webpack --mode=production"
   },
   "author": "Kate Kim",
   "license": "ISC"

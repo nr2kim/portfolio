@@ -8,8 +8,6 @@ module.exports = {
         filename: "katekimPortfolio.js",
         path: __dirname + "/dist"
     },
-    // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
 
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
@@ -31,5 +29,8 @@ module.exports = {
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             { enforce: "pre", test: /.js$/, loader: "source-map-loader" },
         ]
+    },
+    node: {
+        fs: 'empty'
     }
 };

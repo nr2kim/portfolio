@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Typing from 'react-typing-animation';
 
 import './style.css';
 
@@ -22,32 +21,34 @@ class KateKimPortfolio extends React.Component <any, any> {
     private stackedCommands;
     private upCount;
     private myMenu;
-    private numElement;
+    private tabTime;
 
     public constructor(props) {
         super(props);
         this.mouseDownBinder = (e: MouseEvent) => { this.handleMouseClick(e); };
         this.stackedCommands = [];
         this.upCount = 0;
-
+        this.tabTime = new Date();
         this.myMenu = {
-            about: {
-                kate:       <AboutKate />,
-                education:  <AboutEducation />,
-                skills:      <AboutSkills />
-            },
-            help: {
-                about:      <HelpAbout />,
-                fetch:      <HelpFetch />,
-                contact:    <HelpContact />
-            },
-            fetch: {
-                experiences:    <FetchExperiences />,
-                projects:       <FetchProjects />,
-                resume:         <FetchResume />
-            },
-            contact:    <Contact />,
-            commandNotFound: <CommandNotFound />
+            kate: {
+                about: {
+                    kate: <AboutKate/>,
+                    education: <AboutEducation/>,
+                    skills: <AboutSkills/>
+                },
+                help: {
+                    about: <HelpAbout/>,
+                    fetch: <HelpFetch/>,
+                    contact: <HelpContact/>
+                },
+                fetch: {
+                    experiences: <FetchExperiences/>,
+                    projects: <FetchProjects/>,
+                    resume: <FetchResume/>
+                },
+                contact: <Contact/>,
+                commandNotFound: <CommandNotFound/>
+            }
         };
 
         this.state = {
@@ -68,11 +69,31 @@ class KateKimPortfolio extends React.Component <any, any> {
 
     public componentDidMount() {
         document.addEventListener('click', this.mouseDownBinder);
-        this.numElement++;
     }
 
     public componentWillUnmount() {
         document.removeEventListener('click', this.mouseDownBinder);
+    }
+
+    public handleTab(e) {
+        const command = e.target.value.toString();
+        let searching = this.myMenu;
+        const commandArray = command.trim().split(' ');
+        if (commandArray.length > 1) {
+            for (let i = 0; i < commandArray.length - 1; i++) {
+                if (searching.hasOwnProperty(commandArray[i])) {
+                    searching = searching[commandArray[i]];
+                } else {
+                    return;
+                }
+            }
+        }
+        for (let key in searching) {
+            if (key.substring(0, commandArray[commandArray.length -1].length) === commandArray[commandArray.length -1]) {
+                e.target.value = command + key.substring(commandArray[commandArray.length -1].length, key.length);
+                return;
+            }
+        }
     }
 
     public handleEnter(e) {
@@ -87,55 +108,47 @@ class KateKimPortfolio extends React.Component <any, any> {
             [...prevState.stack, <div>>> {command.toString()}<br /><br /></div>]}));
 
         const splitCommands = command.trim().split(' ');
-        if (splitCommands[0] === 'kate') {
-            if (splitCommands.length === 1) {
-                // TODO:: another help session
-                this.setState((prevState) => ({ stack:
-                    [...prevState.stack, <div>
-                        Hello,
-                        <br/>To know about me, type 'kate about'.
-                        <br/>If you want to look up the options, please type 'kate help'.
-                        <br/><br/>
-                        </div>
-                    ]
-                }));
-
-            } else if (splitCommands.length === 2 && this.myMenu[splitCommands[1]]) {
-                if (splitCommands[1] === 'contact') {
-                    this.setState((prevState) => ({ stack:
-                        [...prevState.stack, <div>{this.myMenu[splitCommands[1]]}<br /></div>]
-                    }));
-                } else {
-                    Object.keys(this.myMenu[splitCommands[1]]).forEach((key) => {
-                        this.setState((prevState) => ({ stack:
-                            [...prevState.stack, <div>{this.myMenu[splitCommands[1]][key]}<br /></div>]
-                        }));
-                    });
-                }
-            } else if (splitCommands.length === 3 &&
-                        this.myMenu[splitCommands[1]] &&
-                        this.myMenu[splitCommands[1]][splitCommands[2]]) {
-                this.setState((prevState) => ({ stack:
-                    [...prevState.stack, <div>{this.myMenu[splitCommands[1]][splitCommands[2]]}<br /></div>]
-                }));
+        let index = 0;
+        let searching = this.myMenu;
+        while (index < splitCommands.length) {
+            if (searching !== undefined && searching.hasOwnProperty(splitCommands[index])) {
+                searching = searching[splitCommands[index]];
+                index++;
             } else {
                 this.setState((prevState) => ({ stack:
-                    [...prevState.stack, this.myMenu.commandNotFound]
+                        [...prevState.stack, this.myMenu.kate.commandNotFound]
                 }));
+                return;
             }
-        } else if (command === '') {
-            // Nothing
-        } else {
+        };
+
+        if (index === 1) {
             this.setState((prevState) => ({ stack:
-                [...prevState.stack, this.myMenu.commandNotFound]
+                    [...prevState.stack, <div>Hello, there!<br /></div>]
+            }));
+        } else if (index === 2) {
+            if (splitCommands[splitCommands.length-1] === "contact") {
+                this.setState((prevState) => ({ stack:
+                        [...prevState.stack, <div>{searching}<br /></div>]
+                }));
+            } else {
+                for (let objs in searching) {
+                    this.setState((prevState) => ({
+                        stack:
+                            [...prevState.stack, <div>{searching[objs]}<br/></div>]
+                    }));
+                }
+            }
+        } else if (index === 3) {
+            this.setState((prevState) => ({ stack:
+                    [...prevState.stack, <div>{searching}<br /></div>]
             }));
         }
-
-        this.numElement++;
     }
 
     public handleArrowUpDown(e) {
         const inputField = document.querySelector('#userField') as HTMLInputElement;
+
         if (e.keyCode === 38) { // 38: up, 40: down
             if (this.upCount < this.stackedCommands.length) {
                 this.upCount++;
@@ -144,6 +157,11 @@ class KateKimPortfolio extends React.Component <any, any> {
             if (this.upCount > 0) {
                 this.upCount--;
             }
+        } else if (e.keyCode === 9) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.handleTab(e);
+            return;
         } else {
             return;
         }

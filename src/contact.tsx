@@ -15,23 +15,25 @@ export class Contact extends React.Component <any, any> {
     }
 
     public save(e) {
-        const d = new Date();
-        const filename = './' + d.getTime() + ".txt";
-        const buffer = this.senderName.current.value.toString() + "\n"
-            + this.senderEmail.current.value.toString() + "\n"
-            + this.message.current.value.toString() + "\n";
-        fs.open(filename, 'w', function(err, fd) {
-            if (err) {
-                throw 'error opening file: ' + err;
-            }
-
-            fs.write(fd, buffer, 0, buffer.length, null, function(err) {
-                if (err) throw 'error writing file: ' + err;
-                fs.close(fd, function() {
-                    console.log('file written');
-                })
-            });
-        });
+        if(this.senderName.current.value === "") {
+            alert("Sender Name Not Specified.");
+            return;
+        }
+        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if(!re.test(String(this.senderEmail.current.value.toLowerCase()))) {
+            alert("Sender Email Not Specified.");
+            return;
+        }
+        if(this.message.current.value === "") {
+            alert("Cannot Send Empty Message.");
+            return;
+        }
+        const buffer = "Sender:" + this.senderName.current.value.toString() + "\n"
+            + "Email: " + this.senderEmail.current.value.toString() + "\n"
+            + "Message: " + this.message.current.value.toString() + "\n";
+        let xhr = new XMLHttpRequest();
+        xhr.open( 'post', '/server.php', true );
+        xhr.send(buffer);
     }
 
     public render() {
@@ -41,8 +43,7 @@ export class Contact extends React.Component <any, any> {
                 <div className="subSection contact">
                     ✉️&emsp;nr2kim@edu.uwaterloo.ca
                     <br />📞&emsp;(647) 447 - 2273
-                    <br />Github&emsp;
-                    <a href='https://github.com/nr2kim' target="_blank"><span className="bold"> nr2kim </span></a>
+                    <br /><a href='https://github.com/nr2kim' target="_blank"><span className="bold"> nr2kim </span></a>
                     <br />
                     <input type='text' id='senderName' placeholder=" Your name" ref={this.senderName} />
                     <input type='text' id='senderEmail' placeholder=" Your email" ref={this.senderEmail} />

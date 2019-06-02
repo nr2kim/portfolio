@@ -1,36 +1,26 @@
 import * as React from 'react';
+import { Component } from './component';
+
 import './style.css';
 
-export class FetchProjects extends React.Component <any, any> {
-    public constructor(props) {
-        super(props);
-    }
-
-    public onClickHeading(e: any) {
-        e.preventDefault();
-        for(let i = 0; i < e.target.children.length; i++) {
-            if (e.target.children.item(i).id == "openClose") {
-                if (e.target.children.item(i).innerHTML == " 🔼 ") {
-                    e.target.children.item(i).innerHTML = " 🔽 ";
-                } else {
-                    e.target.children.item(i).innerHTML = " 🔼 ";
-                }
-            } else if (e.target.children.item(i).style.display === "") {
-                e.target.children.item(i).style.display = "block";
-            } else {
-                e.target.children.item(i).style.display = "";
-            }
-        }
-    }
-
+export class FetchProjects extends Component {
     public render() {
         return (
             <div>
                 <div className='section'>Kate's Side Projects</div>
                 <div className='subSection' onClick={(e: any) => this.onClickHeading(e)}>
+                    <div id="openClose"> 🔽 </div> TriPlanner
+                    <div className='subSectionBody'>
+                        Duration: From May, 2019 to Present
+                        <br />&emsp;🔍 Creating a website that give recommendations according to their preferences and helps users to plan and record their trips with their friends easily.
+                        <br />&emsp;🔍 Using Google Maps and Places APIs to get information about attractions, operation hours and transportation.
+                        <br />&emsp;🔍 Gaining great user experience and user interface skills.
+                    </div>
+                </div>
+                <div className='subSection' onClick={(e: any) => this.onClickHeading(e)}>
                     <div id="openClose"> 🔽 </div> Cloud management system
                     <div className='subSectionBody'>
-                        Duration: From May, 2018 to Present
+                        Duration: From July, 2018 to September, 2018
                         <br />&emsp;🔍 Creating a management system for cloud storages
                                      for easier access, handle, and search in one application.
                         <br />&emsp;🔍 Exposed in Java UI frameworks, such as swings and awt

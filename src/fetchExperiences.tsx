@@ -1,32 +1,23 @@
 import * as React from 'react';
+import { Component } from './component';
+
 import './style.css';
 
-export class FetchExperiences extends React.Component <any, any> {
-    public constructor(props) {
-        super(props);
-    }
-
-    public onClickHeading(e: any) {
-        e.preventDefault();
-        for(let i = 0; i < e.target.children.length; i++) {
-            if (e.target.children.item(i).id == "openClose") {
-                if (e.target.children.item(i).innerHTML == " 🔼 ") {
-                    e.target.children.item(i).innerHTML = " 🔽 ";
-                } else {
-                    e.target.children.item(i).innerHTML = " 🔼 ";
-                }
-            } else if (e.target.children.item(i).style.display === "") {
-                e.target.children.item(i).style.display = "block";
-            } else {
-                e.target.children.item(i).style.display = "";
-            }
-        }
-    }
-
+export class FetchExperiences extends Component {
     public render() {
         return (
             <div>
                 <div className='section'>Kate's Work Experiences</div>
+                <div className='subSection' onClick={(e: any) => this.onClickHeading(e)}>
+                    <div id="openClose"> 🔽 </div> Firmware Features Engineer in Cisco Meraki
+                    <div className='subSectionBody'>
+                        Duration: From January, 2019 to April, 2019
+                        <br />location: San Francisco, United States
+                        <br />&emsp;👉 Analyzed and tested network techniques for measuring capacity of the bottleneck link on WAN path and implemented a configurable daemon process based on these techniques in C++.
+                        <br />&emsp;👉 Created patches for bugs on open-source libraries such as HPing3 and cURL.
+                        <br />&emsp;👉 Obtained better teamwork and thinking-outside-the-box skills.
+                    </div>
+                </div>
                 <div className='subSection' onClick={(e: any) => this.onClickHeading(e)}>
                     <div id="openClose"> 🔽 </div> Web and Cloud Developer in Autodesk
                     <div className='subSectionBody'>
