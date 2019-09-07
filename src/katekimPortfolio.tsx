@@ -99,7 +99,7 @@ class KateKimPortfolio extends React.Component <any, any> {
     public handleEnter(e) {
         if (e.key !== 'Enter') { return; }
         this.setState({ displayInput: false });
-        const command = e.target.value.toString().toLowerCase();
+        const command = e.target.value.toString();
         e.target.value = '';
         this.stackedCommands.push(command);
         this.upCount = 0;
@@ -107,7 +107,7 @@ class KateKimPortfolio extends React.Component <any, any> {
         this.setState((prevState) => ({ stack:
             [...prevState.stack, <div>>> {command.toString()}<br /><br /></div>]}));
 
-        const splitCommands = command.trim().split(' ');
+        const splitCommands = command.toLowerCase().trim().split(' ');
         let index = 0;
         let searching = this.myMenu;
         while (index < splitCommands.length) {
