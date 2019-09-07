@@ -99,7 +99,7 @@ class KateKimPortfolio extends React.Component <any, any> {
     public handleEnter(e) {
         if (e.key !== 'Enter') { return; }
         this.setState({ displayInput: false });
-        const command = e.target.value.toString();
+        const command = e.target.value.toString().toLowerCase();
         e.target.value = '';
         this.stackedCommands.push(command);
         this.upCount = 0;
