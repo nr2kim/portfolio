@@ -3,13 +3,19 @@ import { Component } from './component';
 
 import './style.css';
 
+const PROJECT_MAPPING = {
+    TriPlanner: 'https://github.com/nr2kim/tempTriPlanner',
+    CloudManagementSystem: 'https://github.com/nr2kim/Cloudeer-JavaFX'
+}
+
 export class FetchProjects extends Component {
     public render() {
         return (
             <div>
                 <div className='section'>Kate's Side Projects</div>
                 <div className='subSection' onClick={(e: any) => this.onClickHeading(e)}>
-                    <div id="openClose"> 🔽 </div> TriPlanner
+                    <div id="openClose"> 🔽 </div>
+                    <a href={PROJECT_MAPPING.TriPlanner} target="_blank"> TriPlanner </a>
                     <div className='subSectionBody'>
                         Duration: From May, 2019 to Present
                         <br />&emsp;🔍 Creating a website that give recommendations according to their preferences and helps users to plan and record their trips with their friends easily.
@@ -18,7 +24,8 @@ export class FetchProjects extends Component {
                     </div>
                 </div>
                 <div className='subSection' onClick={(e: any) => this.onClickHeading(e)}>
-                    <div id="openClose"> 🔽 </div> Cloud management system
+                    <div id="openClose"> 🔽 </div>
+                    <a href={PROJECT_MAPPING.TriPlanner} target="_blank"> Cloud management system </a>
                     <div className='subSectionBody'>
                         Duration: From July, 2018 to September, 2018
                         <br />&emsp;🔍 Creating a management system for cloud storages
@@ -26,16 +33,6 @@ export class FetchProjects extends Component {
                         <br />&emsp;🔍 Exposed in Java UI frameworks, such as swings and awt
                                      and open source APIs of Dropbox, GoogleDrive, and OneDrive.
                         <br />&emsp;🔍 Enhanced leadership and project management skills as directing the project.
-                    </div>
-                </div>
-                <div className='subSection' onClick={(e: any) => this.onClickHeading(e)}>
-                    <div id="openClose"> 🔽 </div> Connect-4 Online
-                    <div className='subSectionBody'>
-                        Duration: From June, 2018 to Present
-                        <br />&emsp;🔍 Developing the web version of a board game, Connect-4, in a group of 2.
-                        <br />&emsp;🔍 Experiencing the whole project workflow from start to the end,
-                                     including server-side and UI-side.
-                        <br />&emsp;🔍 Improving high-level designing, estimating, and planning skills.
                     </div>
                 </div>
                 <div className='subSection' onClick={(e: any) => this.onClickHeading(e)}>

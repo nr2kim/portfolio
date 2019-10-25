@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Typing from 'react-typing-animation';
 
 // tslint:disable-next-line:no-import-side-effect
 import './style.css';

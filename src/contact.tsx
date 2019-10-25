@@ -28,12 +28,22 @@ export class Contact extends React.Component <any, any> {
             alert("Cannot Send Empty Message.");
             return;
         }
-        const buffer = "Sender:" + this.senderName.current.value.toString() + "\n"
-            + "Email: " + this.senderEmail.current.value.toString() + "\n"
-            + "Message: " + this.message.current.value.toString() + "\n";
+        let data = 'sender=' + this.senderName.current.value.toString()
+            + '&email=' + this.senderEmail.current.value.toString()
+            + '&message=' + this.message.current.value.toString();
         let xhr = new XMLHttpRequest();
-        xhr.open( 'post', '/server.php', true );
-        xhr.send(buffer);
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               console.log(this.responseText)
+               alert("Thank you for reaching out to me!\n I will get back to you as soon as possible.");
+           }
+        }
+        xhr.open('post', 'index.php', true);
+        xhr.send(data);
+
+        this.senderName.current.value = "";
+        this.senderEmail.current.value = "";
+        this.message.current.value = "";
     }
 
     public render() {
