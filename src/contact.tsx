@@ -32,18 +32,23 @@ export class Contact extends React.Component <any, any> {
             + '&email=' + this.senderEmail.current.value.toString()
             + '&message=' + this.message.current.value.toString();
         let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-               console.log(this.responseText)
-               alert("Thank you for reaching out to me!\n I will get back to you as soon as possible.");
-           }
+        xhr.onreadystatechange = (x) => {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    this.senderName.current.value = "";
+                    this.senderEmail.current.value = "";
+                    this.message.current.value = "";
+                    alert("Thank you for reaching out to me!\n I will get back to you as soon as possible.");
+                } else {
+                    alert("An error has occurred. Please Try again later.");
+                }
+            }
         }
         xhr.open('post', 'index.php', true);
+        xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
         xhr.send(data);
 
-        this.senderName.current.value = "";
-        this.senderEmail.current.value = "";
-        this.message.current.value = "";
+        
     }
 
     public render() {
