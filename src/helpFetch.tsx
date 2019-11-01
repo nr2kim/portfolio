@@ -16,7 +16,7 @@ export class HelpFetch extends React.Component <any, any> {
                          <span className='limeColor'> kate fetch {optionsAngleBracketed}</span></span>
                     <div className='subSection'>options:</div>
                     <div style={{ display: 'block', width: '90%', margin: '0 4%'}}>
-                        <div style={{ display: 'inline-block', width: '10%'}}>
+                        <div className='helpOptions'>
                             <span className='limeColor'>experiences</span>
                         </div>
                         <div style={{display: 'inline-block', width: '80%'}}>
@@ -24,7 +24,7 @@ export class HelpFetch extends React.Component <any, any> {
                         </div>
                     </div>
                     <div style={{ display: 'block', width: '90%', margin: '0 4%'}}>
-                        <div style={{ display: 'inline-block', width: '10%'}}>
+                        <div className='helpOptions'>
                             <span className='limeColor'>projects</span>
                         </div>
                         <div style={{display: 'inline-block', width: '80%'}}>
@@ -32,7 +32,7 @@ export class HelpFetch extends React.Component <any, any> {
                         </div>
                     </div>
                     <div style={{ display: 'block', width: '90%', margin: '0 4%'}}>
-                        <div style={{ display: 'inline-block', width: '10%'}}>
+                        <div className='helpOptions'>
                             <span className='limeColor'>resume</span>
                         </div>
                         <div style={{display: 'inline-block', width: '80%'}}>

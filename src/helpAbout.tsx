@@ -18,15 +18,15 @@ export class HelpAbout extends React.Component <any, any> {
                          <span className='limeColor'> kate about {optionsAngleBracketed}</span></span>
                     <div className='subSection'>options:</div>
                     <div style={{ display: 'block', width: '90%', margin: '0 4%'}}>
-                        <div style={{ display: 'inline-block', width: '10%'}}>
                             <span className='limeColor'>kate</span>
+                        <div className='helpOptions'>
                         </div>
                         <div style={{display: 'inline-block', width: '80%'}}>
                             Basic information of what you need to know about Kate Kim as a human being
                         </div>
                     </div>
                     <div style={{ display: 'block', width: '90%', margin: '0 4%'}}>
-                        <div style={{ display: 'inline-block', width: '10%'}}>
+                        <div className='helpOptions'>
                             <span className='limeColor'>education</span>
                         </div>
                         <div style={{display: 'inline-block', width: '80%'}}>
@@ -34,7 +34,7 @@ export class HelpAbout extends React.Component <any, any> {
                         </div>
                     </div>
                     <div style={{ display: 'block', width: '90%', margin: '0 4%'}}>
-                        <div style={{ display: 'inline-block', width: '10%'}}>
+                        <div className='helpOptions'>
                             <span className='limeColor'>skills</span>
                         </div>
                         <div style={{display: 'inline-block', width: '80%'}}>

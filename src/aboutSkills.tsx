@@ -7,7 +7,7 @@ export class AboutSkills extends Component {
     public render() {
         return (
             <div>
-                <div className='section'>Kate's Brain</div>
+                <div className='section'>Kate's Strength</div>
                 <div className='subSection'onClick={(e: any) => this.onClickHeading(e)}>
                     <div id="openClose"> 🔽 </div> Soft Skills
                     <div className='subSectionBody'>

@@ -8,10 +8,15 @@ export class AboutKate extends Component {
         return (
             <div>
                 <div className='section'>Kate's Basic Information</div>
-                <div className='subSection' onClick={(e: any) => this.onClickHeading(e)}>
-                    Name: Kate Kim
-                    <br />Mission statement: One can change everyone's daily life; stay motivated!
-                    <br />Interests: Food fighter (ง •̀_•́)ง
+                <div className='subSection'>
+                    <div className='twoColLeft200'>
+                        <img src="../resources/katekim.jpg" />
+                    </div>
+                    <div className='twoColRight-200'>
+                        Name: Kate Kim
+                        <br />Mission statement: One can change everyone's daily life; stay motivated!
+                        <br />Interests: Food fighter (ง •̀_•́)ง
+                    </div>
                 </div>
                 <div className="subSection" onClick={(e: any) => this.onClickHeading(e)}>
                     <div id="openClose"> 🔽 </div> Q & A

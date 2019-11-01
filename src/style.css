@@ -180,4 +180,33 @@ a {
 }
 
 
+.helpOptions {
+    display: inline-block;
+    width: 10%;
+    min-width: 110px;
+}
 
+.twoColLeft200 {
+    display: inline-block;
+    width: 200px;
+}
+
+.twoColLeft200 img {
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.twoColRight-200 {
+    display: inline-block;
+    width: calc(100% - 240px);
+    height: 100%;
+    margin: 20px;
+    top: 0;
+}
+
+#TriPlannerGif {
+    width: 80%;
+    margin: 5px 5px;
+}

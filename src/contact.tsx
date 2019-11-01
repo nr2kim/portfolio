@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as fs from 'browserify-fs';
 import './style.css';
 
 export class Contact extends React.Component <any, any> {

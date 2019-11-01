@@ -3,7 +3,7 @@ import { Component } from './component';
 
 import './style.css';
 
-const PROJECT_MAPPING = {
+const PROJECT_GITHUB = {
     TriPlanner: 'https://github.com/nr2kim/tempTriPlanner',
     CloudManagementSystem: 'https://github.com/nr2kim/Cloudeer-JavaFX'
 }
@@ -14,18 +14,19 @@ export class FetchProjects extends Component {
             <div>
                 <div className='section'>Kate's Side Projects</div>
                 <div className='subSection' onClick={(e: any) => this.onClickHeading(e)}>
-                    <div id="openClose"> 🔽 </div>
-                    <a href={PROJECT_MAPPING.TriPlanner} target="_blank"> TriPlanner </a>
+                    <div id="openClose"> 🔽 </div> TriPlanner
+                    <a href={PROJECT_GITHUB.TriPlanner} target="_blank" />
                     <div className='subSectionBody'>
                         Duration: From May, 2019 to Present
                         <br />&emsp;🔍 Creating a website that give recommendations according to their preferences and helps users to plan and record their trips with their friends easily.
                         <br />&emsp;🔍 Using Google Maps and Places APIs to get information about attractions, operation hours and transportation.
                         <br />&emsp;🔍 Gaining great user experience and user interface skills.
+                        <br /><img id='TriPlannerGif' src="../resources/TriPlanner.gif" />
                     </div>
                 </div>
                 <div className='subSection' onClick={(e: any) => this.onClickHeading(e)}>
-                    <div id="openClose"> 🔽 </div>
-                    <a href={PROJECT_MAPPING.TriPlanner} target="_blank"> Cloud management system </a>
+                    <div id="openClose"> 🔽 </div> Cloud Management System
+                    <a href={PROJECT_GITHUB.CloudManagementSystem} target="_blank" />
                     <div className='subSectionBody'>
                         Duration: From July, 2018 to September, 2018
                         <br />&emsp;🔍 Creating a management system for cloud storages
